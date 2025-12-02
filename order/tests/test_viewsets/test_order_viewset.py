@@ -15,13 +15,16 @@ class TestOrderViewSet(APITestCase):
     client = APIClient()
 
     def setUp(self):
+        self.user = UserFactory()
+        self.client.force_authenticate(user=self.user)
         self.category = CategoryFactory(title="technology")
         self.product = ProductFactory(
             title="mouse", price=100, category=[self.category]
         )
-        self.order = OrderFactory(product=[self.product])
+        # self.order = OrderFactory(product=[self.product], user=self.user)
 
     def test_order(self):
+        order = OrderFactory(product=[self.product], user=self.user)
         response = self.client.get(
             reverse("order-list", kwargs={"version": "v1"}))
 
@@ -45,9 +48,8 @@ class TestOrderViewSet(APITestCase):
         )
 
     def test_create_order(self):
-        user = UserFactory()
         product = ProductFactory()
-        data = json.dumps({"products_id": [product.id], "user": user.id})
+        data = json.dumps({"products_id": [product.id], "user": self.user.id})
 
         response = self.client.post(
             reverse("order-list", kwargs={"version": "v1"}),
@@ -57,4 +59,4 @@ class TestOrderViewSet(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
-        created_order = Order.objects.get(user=user)
+        created_order = Order.objects.get(user=self.user)
