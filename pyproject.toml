@@ -1,10 +1,4 @@
-[project]
-name = "bookstore"
-version = "0.1.0"
-description = ""
-authors = [
-    {name = "mawet",email = "ra78161@uem.br"}
-]
+
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
@@ -19,8 +13,10 @@ dependencies = [
 [tool.poetry]
 name = "bookstore"
 version = "0.1.0"
-description = "Django bookstore API"
-authors = ["mawet <ra78161@uem.br>"]
+description = ""
+authors = [
+    {name = "mawet", email = "ra78161@uem.br"}
+]
 packages = [
     { include = "bookstore" },
     { include = "order" },
