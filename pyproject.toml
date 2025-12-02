@@ -14,9 +14,7 @@ dependencies = [
 name = "bookstore"
 version = "0.1.0"
 description = ""
-authors = [
-    {name = "mawet", email = "ra78161@uem.br"}
-]
+authors = ["mawet <ra78161@uem.br>"]
 packages = [
     { include = "bookstore" },
     { include = "order" },
