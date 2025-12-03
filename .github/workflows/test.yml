@@ -24,9 +24,11 @@ jobs:
 
       - name: Install dependencies
         run: poetry install --no-root
+        working-directory: .
 
       - name: Run tests
         env:
           DJANGO_SETTINGS_MODULE: bookstore.settings
-          PYTHONPATH: .
+          PYTHONPATH: ${{ github.workspace }}
         run: poetry run pytest
+        working-directory: .
